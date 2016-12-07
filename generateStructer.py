@@ -10,12 +10,56 @@ def generate(x):
 	# 生成第一层
 	for i in range(x):
 		for j in range(x):
-			layer0[""+str(i)+"-"+str(j)+""] = 0
+
+			layer0[makeAxes(i,j,0)] = 0
 	res.append(layer0)
 	# 生成剩下的层
 	for n in range(1,height):
+		# 新生成的一层
 		thisLayer = {}
-		for i in range()
+		# 上一层
+		lastLayer = res[n-1]
+		# 奇数层，横着生成
+		if n%2 == 1:
+			for k,v in lastLayer.items():
+				# 能和当前点共同激活下一层的点是否存在（也就是横坐标不变，纵坐标+1的点是否存在）
+				x = getX(k)
+				newY = getY(k) + 1
+				z = getZ(k)
+				if makeAxes(x,newY,z) in lastLayer:
+					# 确认存在，就生成新的点
+					newPoint = makeAxes(x,float(2*newY-1)/2,z+1)
+					thisLayer[newPoint] = 0
+		else:
+			# 偶数层，纵向生成
+			for k,v in lastLayer.items():
+				# 这一层就纵着来，方法同上
+				newX = getX(k)+1
+				y = getY(k)
+				z = getZ(k)
+				if makeAxes(newX,y,z) in lastLayer:
+					# 生成新的点
+					newPoint = makeAxes((2*newX-1)/2,y,z+1)
+					thisLayer[newPoint] = 0
+		res.append(thisLayer)
 	return res
-print generate(2)
+# 从完整坐标中获取纵坐标
+def getY(full):
+	return float(full.split("-")[1])
+# 从完整坐标中获取横坐标
+def getX(full):
+	return float(full.split("-")[0])
+# 从完整坐标获取树坐标
+def getZ(full):
+	return float(full.split("-")[2])
+# 用xyz生成坐标
+def makeAxes(x,y,z):
+	return str(float(x))+"-"+str(float(y))+"-"+str(float(z))
+# 打印输出结果
+def printRes(res):
+	for index,layer in enumerate(res):
+		print "第"+ str(index) +"层"
+		print layer
+res = generate(32)
+printRes(res)
 

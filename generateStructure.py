@@ -1,4 +1,5 @@
 #encoding:utf-8
+# 生成结构
 # 用于生成的函数，接受参数:一条边上的元素数量
 def generate(x):
 	# 高度
@@ -59,7 +60,26 @@ def makeAxes(x,y,z):
 def printRes(res):
 	for index,layer in enumerate(res):
 		print "第"+ str(index) +"层"
-		print layer
-res = generate(32)
-printRes(res)
 
+		print len(layer)
+# 展示某一层
+# import sys
+def showLayer(layer):
+	# 获取所有单独坐标
+	xs = []
+	ys = []
+	zs = []
+	for k,v in layer.items():
+		if getX(k) not in xs:
+			xs.append(getX(k))
+		if getY(k) not in ys:
+			ys.append(getY(k))
+	zs.append(getZ(k))
+	# 排序
+	xs = sorted(xs)
+	ys = sorted(ys)
+	# 展示
+	for i in xs:
+		for j in ys:
+			print (layer[makeAxes(i,j,zs[0])]),
+		print "\n"

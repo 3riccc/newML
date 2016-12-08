@@ -63,7 +63,7 @@ def printRes(res):
 
 		print len(layer)
 # 展示某一层
-# import sys
+import sys
 def showLayer(layer):
 	# 获取所有单独坐标
 	xs = []
@@ -81,5 +81,8 @@ def showLayer(layer):
 	# 展示
 	for i in xs:
 		for j in ys:
-			print (layer[makeAxes(i,j,zs[0])]),
+			if str(layer[makeAxes(i,j,zs[0])]) == "0":
+				sys.stdout.write(" ")
+			else:
+				sys.stdout.write(str(layer[makeAxes(i,j,zs[0])]))
 		print "\n"

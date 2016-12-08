@@ -81,7 +81,7 @@ def showLayer(layer):
 	# 展示
 	for i in xs:
 		for j in ys:
-			if str(layer[makeAxes(i,j,zs[0])]) == "0":
+			if str(layer[makeAxes(i,j,zs[0])]) == "0" or str(layer[makeAxes(i,j,zs[0])]) == "2":
 				sys.stdout.write(" ")
 			else:
 				sys.stdout.write(str(layer[makeAxes(i,j,zs[0])]))

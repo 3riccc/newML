@@ -31,7 +31,6 @@ def grow(struct):
 	# 每一层的循环,n代表层数，从零开始
 	for n in range(height):
 		# 一层中每个元素的循环，看看是否能生长
-		print n
 		if n%2 == 0:
 			# 偶数层，横向生长
 			for k,v in struct[n].items():
@@ -43,7 +42,6 @@ def grow(struct):
 					
 					# 下一个点是否有值，有的话共同激活
 					if gs.makeAxes(x,y+1,z) in struct[n] and str(struct[n][gs.makeAxes(x,y+1,z)]) != '0':
-						print x,y,z
 						# 激活下一层
 						struct[n+1][gs.makeAxes(x,(2*y+1)/2,z+1)] = '1'
 						# 改变自身状态
@@ -64,7 +62,4 @@ def grow(struct):
 						# 改变自身状态
 						struct[n][gs.makeAxes(x,y,z)] = '2'
 						struct[n][gs.makeAxes(x+1,y,z)] = '2'
-grow(struct)
-for i in range(len(struct)):
-	print "-----------------------------第"+str(i)+"层---------------------------------"
-	gs.showLayer(struct[i])
+	return struct

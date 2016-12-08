@@ -86,3 +86,17 @@ def showLayer(layer):
 			else:
 				sys.stdout.write(str(layer[makeAxes(i,j,zs[0])]))
 		print "\n"
+# 结构清零
+def clearStructure(struct):
+	for layer in struct:
+		for key,value in layer.items():
+			layer[key] = 0
+	return struct
+
+
+
+
+
+
+
+
